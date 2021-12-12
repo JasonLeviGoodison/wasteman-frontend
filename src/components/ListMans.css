@@ -1,0 +1,49 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.grid-element {
+  width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.element-info {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+}
+
+.mansTitle {
+  color: #4b4b4b;
+  border: 0;
+  box-shadow: none;
+  margin: 30px 21px 24px;
+  padding: 0 calc(7% + 15px);
+  text-align: center;
+}
+
+.paraText {
+  color: #4b4b4b;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 auto;
+  max-width: 600px;
+  text-align: center;
+  width: 80%;
+}
+
+.titleText {
+  color: #4b4b4b;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  margin-top: 0;
+  text-align: center;
+}
