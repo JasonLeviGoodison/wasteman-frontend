@@ -1,9 +1,11 @@
+import WasteManProfile from './WasteManProfile';
+
 const Home = () => {
   return (
-    <div style={{}}>
-      <h1> Mint </h1>
+    <div style={{marginTop: 80}}>
+      <h1 className='titleText'> Mint now </h1>
       <div>
-        Here you can mint
+        <WasteManProfile minter entry={{image: "/girlclubmint.gif"}} index={1}/>
       </div>
     </div>
   )

@@ -48,8 +48,7 @@ const WalletLinker = ({setConnectedWallet}) => {
     <div>
       {defaultAccount == null && 
         <div className="walletCard">
-          <h1>Connect to MetaMask</h1>
-          <Button onClick={connectWalletHandler}>Connect</Button>
+          <Button onClick={connectWalletHandler}>Connect Wallet</Button>
           {errorMessage}
         </div>
       }

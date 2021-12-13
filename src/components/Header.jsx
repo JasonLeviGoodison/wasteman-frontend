@@ -7,9 +7,6 @@ import * as routes from '../routes/routes';
 const Header = (props) => {
   let navigate = useNavigate();
 
-  const onAboutClicked = () => {
-    navigate(routes.ABOUT);
-  };
   const onMansClicked = () => {
     navigate(routes.MANS);
   };
@@ -38,8 +35,7 @@ const Header = (props) => {
           <Nav className="ml-auto">
             <Nav.Link href="http://3.90.235.184/"> Home </Nav.Link>
             <Nav.Link onClick={homeClicked}> Mint </Nav.Link>
-            <Nav.Link onClick={onAboutClicked}> About </Nav.Link>
-            <Nav.Link onClick={onMansClicked}> AllMans </Nav.Link>
+            <Nav.Link onClick={onMansClicked}> Collection </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

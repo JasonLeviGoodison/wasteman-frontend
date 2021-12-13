@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import "./ListMans.css"
 import WalletLinker from './WalletLinker';
+import WasteManProfile from './WasteManProfile';
 
 const ListMans = () => {
   //const [connectedWallet, setConnectedWallet] = useState(false);
@@ -10,8 +10,6 @@ const ListMans = () => {
     image: "https://ipfs.infura.io/ipfs/QmcFgDJJoYrUvYcHSuGPTiSeaSY8sp5Xz1PapiB8QM8wzM",
     votes: 0
   }])
-  const [clickedEntry, setClickedEntry] = useState(0);
-
 
   useEffect(() => {
     getEntries()
@@ -24,13 +22,8 @@ const ListMans = () => {
     setEntries(results)
   }
 
-  const voteForEntryClicked = (index) => {
-    return () => {
-      setClickedEntry(index);
-    }
-  }
-
   entries = [entries[0], entries[0], entries[0], entries[0], entries[0]]
+  console.log(entries)
 
   return (
     <div>
@@ -41,15 +34,7 @@ const ListMans = () => {
         </div>
         <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
           {entries && entries.map((entry, index) => {
-            //<Entry entry={entry}/>
-            return (
-              <div style={{display: 'flex', flexDirection: 'column', border: "2px solid #e5e5e5", borderRadius: 10, padding: 20, margin: 10}}>
-                <h2 className="titleText" style={{fontSize: 24}}> <b>WasteMan #{index + 1} <br/></b> </h2>
-                <img className="grid-element" src={entry.image} style={{height: 300, width: 300 }}/>
-                {/* <div className="element-info">
-                Minter: 
-                </div> */}
-              </div>)
+            return <WasteManProfile entry={entry} index={index}/>
           })}
         </div>
       </div>
