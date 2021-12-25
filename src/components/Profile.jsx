@@ -1,23 +1,22 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Minter from './Minter';
-import WasteMansContract  from  "./contracts/WasteMans.json";
+import MiamiAfterDark  from  "./contracts/MiamiAfterDark.json";
 import Web3 from 'web3';
 require("dotenv").config();
 
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 
-const WasteManProfile = ({entry, index, minter = false}) => {
+const Profile = ({entry, index, minter = false}) => {
   console.log(entry, index)
   const [connectedWallet, setConnectedWallet] = useState(null)
   
   var provider = alchemyKey;
   var web3Provider = new Web3.providers.HttpProvider(provider);
   const web3 = new Web3(web3Provider);
-  const contractAddr = '0x9700e8707CdC5209Aa45B439c352d218Fc41097B';
+  const contractAddr = '0xFa3bA15F69d3dd4d9b3c9F2f19A47e47E0Bcb49E';
 
-  console.log(WasteMansContract)
-  const contract = new web3.eth.Contract(WasteMansContract.abi, contractAddr);
+  const contract = new web3.eth.Contract(MiamiAfterDark.abi, contractAddr);
 
   const [number, setNumber] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -41,7 +40,7 @@ const WasteManProfile = ({entry, index, minter = false}) => {
   
   return (
     <div style={{display: 'flex', flexDirection: 'column', border: "2px solid #e5e5e5", borderRadius: 10, padding: 20, margin: 10, marginRight: 'auto', marginLeft: 'auto', maxWidth: 440}}>
-      {!minter && <h2 className="titleText" style={{fontSize: 24}}> <b>WasteMan #{index + 1} <br/></b> </h2> }
+      {!minter && <h2 className="titleText" style={{fontSize: 24}}> <b>M.A.D #{index + 1} <br/></b> </h2> }
       <img className="grid-element" src={entry.image} style={{height: 300, width: 300 }}/>
       {
         minter && 
@@ -53,10 +52,10 @@ const WasteManProfile = ({entry, index, minter = false}) => {
             </div>
           }
           <Minter />
-          {loading ? "Loading" : `Total Minted: ${number}`}
+          <span style={{ paddingTop: 10}}> {loading ? "Loading" : `Total Minted: ${number}`} </span>
         </div>
       }
     </div>)
 }
 
-export default WasteManProfile;
+export default Profile;

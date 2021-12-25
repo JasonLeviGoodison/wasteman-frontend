@@ -2,20 +2,25 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { connectWallet, getCurrentWalletConnected, mintNFTs } from "../alchemy/interact.js";
+import { connectWallet, getCurrentWalletConnected, mintNFTs, addWalletListener } from "../alchemy/interact.js";
+import { withSnackbar } from 'notistack';
 
 const Minter = (props) => {
   //State variables
+  const { enqueueSnackbar } = props;
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
   const [numToMint, setNumToMint] = useState(1);
 
   useEffect(async () => {
-    const {address, status} = await getCurrentWalletConnected();
+    const {address, status, variant} = await getCurrentWalletConnected();
     setWallet(address)
     setStatus(status);
+    enqueueSnackbar(status, { 
+      variant
+    })
 
-    addWalletListener(); 
+    addWalletListener(setWallet, enqueueSnackbar); 
 }, []);
 
   const connectWalletPressed = async () => {
@@ -25,33 +30,12 @@ const Minter = (props) => {
   };
 
   const onMintPressed = async () => {
-    const { status } = await mintNFTs(numToMint);
+    const { status, success } = await mintNFTs(numToMint);
     setStatus(status);
+    enqueueSnackbar(status, { 
+      variant: success === true ? 'success' : 'error'
+    })
   };
-
-  function addWalletListener() {
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", (accounts) => {
-        if (accounts.length > 0) {
-          setWallet(accounts[0]);
-        } else {
-          setWallet("");
-          setStatus("🦊 Connect to Metamask using the top right button.");
-        }
-      });
-    } else {
-      setStatus(
-        <p>
-          {" "}
-          🦊{" "}
-          <a target="_blank" href={`https://metamask.io/download.html`}>
-            You must install Metamask, a virtual Ethereum wallet, in your
-            browser.
-          </a>
-        </p>
-      );
-    }
-  }
 
   const handleNumChange = (op) => {
     if (numToMint == 1 && op == '-') {
@@ -68,36 +52,24 @@ const Minter = (props) => {
   return (
     <div className="Minter" style={{display: 'flex', flexDirection: "column"}}>
       {
-        walletAddress == "" && <button id="walletButton" onClick={connectWalletPressed}>
-        {
-          walletAddress.length > 0 ? (
-            "Connected: " +
-            String(walletAddress).substring(0, 6) +
-            "..." +
-            String(walletAddress).substring(38)
-          ) : (
-            <span>Connect Wallet</span>
-          )
-        }
-      </button>
+        walletAddress == "" && <Button id="walletButton" onClick={connectWalletPressed}> <span>Connect Wallet</span> </Button>
       }
-      <div style={{display: "flex", justifyContent: 'center'}}>
-        <div style={{display: "flex", justifyContent: 'center', flexDirection: 'column', marginRight: 10}}>
-          <Button style={{width: 100, height: 50}} variant="primary" id="mintButton" onClick={onMintPressed}>
-            Mint <b>{numToMint}</b>
-          </Button>
+      {
+        walletAddress != "" &&
+        <div style={{display: "flex", justifyContent: 'center'}}>
+          <div style={{display: "flex", justifyContent: 'center', flexDirection: 'column', marginRight: 10}}>
+            <Button style={{width: 100, height: 50}} variant="primary" id="mintButton" onClick={onMintPressed}>
+              Mint <b>{numToMint}</b>
+            </Button>
+          </div>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <Button size="sm" variant="outline-primary" onClick={() => handleNumChange('+')}> <KeyboardArrowUpIcon/> </Button>
+            <Button size="sm" variant="outline-primary" onClick={() => handleNumChange('-')} > <KeyboardArrowDownIcon/> </Button>
+          </div>
         </div>
-        <div style={{display: 'flex', flexDirection: 'column'}}>
-          <Button size="sm" variant="outline-primary" onClick={() => handleNumChange('+')}> <KeyboardArrowUpIcon/> </Button>
-          <Button size="sm" variant="outline-primary" onClick={() => handleNumChange('-')} > <KeyboardArrowDownIcon/> </Button>
-        </div>
-      </div>
-      
-      {/* <p id="status">
-        {status}
-      </p> */}
+      }
     </div>
   );
 }
 
-export default Minter;
+export default withSnackbar(Minter);

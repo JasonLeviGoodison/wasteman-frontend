@@ -14,13 +14,17 @@ const Header = (props) => {
     navigate(routes.HOME);
   }
 
+  const onRefundClicked = () => {
+    navigate(routes.REFUND);
+  }
+
   return (
     <div className="header">
       <Navbar expand="lg">
         <Navbar.Brand onClick={homeClicked}>
           {' '}
           <div style={{ paddingLeft: 10 }}>
-            WasteMans
+            Miami After Dark
             {/* <img
               alt="Company logo"
               src={`${process.env.REACT_APP_REACT_URL}/checklist.png`}
@@ -35,6 +39,7 @@ const Header = (props) => {
           <Nav className="ml-auto">
             <Nav.Link href="http://3.90.235.184/"> Home </Nav.Link>
             <Nav.Link onClick={homeClicked}> Mint </Nav.Link>
+            <Nav.Link onClick={onRefundClicked}> Refund </Nav.Link>
             <Nav.Link onClick={onMansClicked}> Collection </Nav.Link>
           </Nav>
         </Navbar.Collapse>

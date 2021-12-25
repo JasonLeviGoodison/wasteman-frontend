@@ -1,8 +1,8 @@
 import { pinJSONToIPFS } from "./pinata.js";
 require("dotenv").config();
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
-const contract = require("../components/contracts/WasteMans.json");
-const contractAddress = "0x9700e8707CdC5209Aa45B439c352d218Fc41097B";
+const contract = require("../components/contracts/MiamiAfterDark.json");
+const contractAddress = "0xFa3bA15F69d3dd4d9b3c9F2f19A47e47E0Bcb49E";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 
@@ -15,29 +15,23 @@ export const connectWallet = async () => {
       const obj = {
         status: `Youre connected using ${addressArray[0]}`,
         address: addressArray[0],
+        variant: 'success'
       };
       return obj;
     } catch (err) {
       return {
         address: "",
         status: "😥 " + err.message,
+        variant: 'error'
       };
     }
   } else {
     return {
       address: "",
       status: (
-        <span>
-          <p>
-            {" "}
-            🦊{" "}
-            <a target="_blank" href={`https://metamask.io/download.html`}>
-              You must install Metamask, a virtual Ethereum wallet, in your
-              browser.
-            </a>
-          </p>
-        </span>
+        <span>You must install <a target="_blank" style={{color: "aliceblue"}} href={`https://metamask.io/download.html`}> Metamask</a>, a virtual Ethereum wallet, to use this website.</span>
       ),
+      variant: 'error'
     };
   }
 };
@@ -52,34 +46,29 @@ export const getCurrentWalletConnected = async () => {
         return {
           status: `Youre connected using ${addressArray[0]}`,
           address: addressArray[0],
+          variant: 'success'
         };
       } else {
         return {
           address: "",
-          status: "🦊 Connect to Metamask using the top right button.",
+          status: "🦊 Connect to Metamask using the connect wallet button.",
+          variant: 'default'
         };
       }
     } catch (err) {
       return {
         address: "",
         status: "😥 " + err.message,
+        variant: 'error'
       };
     }
   } else {
     return {
       address: "",
       status: (
-        <span>
-          <p>
-            {" "}
-            🦊{" "}
-            <a target="_blank" href={`https://metamask.io/download.html`}>
-              You must install Metamask, a virtual Ethereum wallet, in your
-              browser.
-            </a>
-          </p>
-        </span>
+        <span>You must install <a target="_blank" style={{color: "aliceblue"}} href={`https://metamask.io/download.html`}> Metamask</a>, a virtual Ethereum wallet, to use this website.</span>
       ),
+      variant: 'error'
     };
   }
 };
@@ -113,8 +102,7 @@ export const mintNFTs = async (numToMint = 1) => {
     return {
       success: true,
       status:
-        "✅ Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/" +
-        txHash,
+        <span>Check out your transaction on Etherscan: <a href={"https://rinkeby.etherscan.io/tx/" + txHash}>{txHash}</a></span>,
     };
   } catch (error) {
     return {
@@ -123,3 +111,45 @@ export const mintNFTs = async (numToMint = 1) => {
     };
   }
 };
+
+export const refundMe = async (tokenId) => {
+  window.contract = await new web3.eth.Contract(contract.abi, contractAddress);
+
+  const transactionParameters = {
+    to: contractAddress, // Required except during contract publications.
+    from: window.ethereum.selectedAddress, // must match user's active address.
+    data: window.contract.methods
+      .refundMe(tokenId)
+      .encodeABI(),
+  };
+
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      success: true,
+      status:
+        <span>Check out your transaction on Etherscan: <a href={"https://rinkeby.etherscan.io/tx/" + txHash}>{txHash}</a></span>,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      status: "😥 Something went wrong: " + error.message,
+    };
+  }
+};
+
+export const addWalletListener = (setWallet, enqueueSnackbar) => {
+  if (window.ethereum) {
+    window.ethereum.on("accountsChanged", (accounts) => {
+      if (accounts.length > 0) {
+        setWallet(accounts[0]);
+        enqueueSnackbar("Changed wallet successfully", { variant: "success" })
+      } else {
+        setWallet("");
+      }
+    });
+  }
+}
