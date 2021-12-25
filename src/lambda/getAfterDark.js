@@ -1,13 +1,10 @@
 
-import * as mongoose from 'mongoose'
-import querystring from 'querystring'
-import * as schemas from './schemas/schemas'
+const mongoose = require('mongoose');
+const schemas = require('./schemas/schemas');
 
-import { MONGO_URL, MONGO_OPTIONS } from './utils/mongo'
 
 let db
 let afterDarkSchema
-let allAfterDarks
 
 const handler = async (event, context) => {
   var allAfterDarks;
@@ -15,7 +12,8 @@ const handler = async (event, context) => {
 
   if (!db) {
     try {
-      db = await mongoose.connect(MONGO_URL, MONGO_OPTIONS)
+      var MONGO_URL = process.env.MONGO_URL
+      db = await mongoose.connect(MONGO_URL)
       afterDarkSchema = mongoose.Schema(schemas.AfterDark)
       dbAfterDark = mongoose.model('afterdark', afterDarkSchema)
 

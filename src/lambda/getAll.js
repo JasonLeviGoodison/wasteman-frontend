@@ -1,9 +1,6 @@
 
-import * as mongoose from 'mongoose'
-import * as _ from 'lodash'
-
-import * as schemas from './schemas/schemas'
-import { MONGO_URL, MONGO_OPTIONS } from './utils/mongo'
+const mongoose = require('mongoose');
+const schemas = require('./schemas/schemas');
 
 let db
 let afterDarkSchema
@@ -14,12 +11,17 @@ const handler = async (event, context) => {
 
   if (!db) {
     try {
-      db = await mongoose.connect(MONGO_URL, MONGO_OPTIONS)
+      var MONGO_URL = process.env.MONGO_URL
+      db = await mongoose.connect(MONGO_URL)
       afterDarkSchema = mongoose.Schema(schemas.AfterDark)
       dbAfterDark = mongoose.model('afterdark', afterDarkSchema)
 
-      allAfterDarks = await dbAfterDark.find({});
-
+      //allAfterDarks = await dbAfterDark.find({});
+      allAfterDarks = [{
+        "name": "Will be revealed after public sale ends",
+        "image": "https://gateway.pinata.cloud/ipfs/QmNTi4TfndMRhu4LBXFwDsSagC7M4G5WrLYrCZf3CFqviR",
+        "tokenId": -1,
+      }]
       return {
         statusCode: 200,
         body: JSON.stringify(allAfterDarks)
@@ -41,3 +43,5 @@ const handler = async (event, context) => {
     body: JSON.stringify(allAfterDarks)
   }
 }
+
+exports.handler = handler;

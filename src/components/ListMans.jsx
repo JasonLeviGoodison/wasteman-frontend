@@ -11,7 +11,8 @@ const ListMans = () => {
   }, [])
 
   const getEntries = async () => {
-    var response = await fetch('http://localhost:3001/wastemans/getall');
+    let url = '/.netlify/functions/getAll'
+    var response = await fetch(url); //http://localhost:3001/wastemans/getall'
     var results = await response.json()
     console.log(results, "HERHEREHREHR")
     //TODO: REMOVE THIS AND JUST RETURN RESUTLS
