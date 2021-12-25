@@ -3,8 +3,6 @@ import * as mongoose from 'mongoose'
 import querystring from 'querystring'
 import * as schemas from './schemas/schemas'
 
-import { authenticate } from './utils/authentication'
-
 import { MONGO_URL, MONGO_OPTIONS } from './utils/mongo'
 
 let db
