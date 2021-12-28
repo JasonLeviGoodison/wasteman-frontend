@@ -7,7 +7,7 @@ let db
 let afterDarkSchema
 
 const handler = async (event, context) => {
-  var allAfterDarks;
+  var afterDark;
   var id = event.queryStringParameters.id;
 
   if (!db) {
@@ -15,19 +15,9 @@ const handler = async (event, context) => {
       var MONGO_URL = process.env.MONGO_URL
       db = await mongoose.connect(MONGO_URL)
       afterDarkSchema = mongoose.Schema(schemas.AfterDark)
-      dbAfterDark = mongoose.model('afterdark', afterDarkSchema)
+      // dbAfterDark = mongoose.model('afterdark', afterDarkSchema)
 
       //allAfterDarks = await dbAfterDark.find({ tokenId: id });
-      allAfterDarks = [{
-        "name": "Will be revealed after public sale ends",
-        "image": "https://gateway.pinata.cloud/ipfs/QmNTi4TfndMRhu4LBXFwDsSagC7M4G5WrLYrCZf3CFqviR",
-        "tokenId": -1,
-      }]
-
-      return {
-        statusCode: 200,
-        body: JSON.stringify(allAfterDarks)
-      }
 
     } catch (e) {
       console.error('Error connecting to database:', e)
@@ -40,9 +30,14 @@ const handler = async (event, context) => {
     }
   }
 
+  afterDark = {
+    "name": "Will be revealed after public sale ends",
+    "image": "https://gateway.pinata.cloud/ipfs/QmNTi4TfndMRhu4LBXFwDsSagC7M4G5WrLYrCZf3CFqviR",
+  }
+
   return {
     statusCode: 200,
-    body: JSON.stringify(allAfterDarks)
+    body: JSON.stringify(afterDark)
   }
 }
 
