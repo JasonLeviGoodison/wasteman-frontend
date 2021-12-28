@@ -14,7 +14,7 @@ const Profile = ({entry, index, minter = false}) => {
   var provider = alchemyKey;
   var web3Provider = new Web3.providers.HttpProvider(provider);
   const web3 = new Web3(web3Provider);
-  const contractAddr = '0xFa3bA15F69d3dd4d9b3c9F2f19A47e47E0Bcb49E';
+  const contractAddr = '0x48c0b929dC4fFbA13d804D1e7BFA1bA4305aeAdC';
 
   const contract = new web3.eth.Contract(MiamiAfterDark.abi, contractAddr);
 

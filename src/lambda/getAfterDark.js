@@ -15,7 +15,7 @@ const handler = async (event, context) => {
       var MONGO_URL = process.env.MONGO_URL
       db = await mongoose.connect(MONGO_URL)
       afterDarkSchema = mongoose.Schema(schemas.AfterDark)
-      // dbAfterDark = mongoose.model('afterdark', afterDarkSchema)
+      dbAfterDark = mongoose.model('afterdark', afterDarkSchema)
 
       //allAfterDarks = await dbAfterDark.find({ tokenId: id });
 
@@ -33,11 +33,24 @@ const handler = async (event, context) => {
   afterDark = {
     "name": "Will be revealed after public sale ends",
     "image": "https://gateway.pinata.cloud/ipfs/QmNTi4TfndMRhu4LBXFwDsSagC7M4G5WrLYrCZf3CFqviR",
+    "tokenId": id
   }
+
+  if (id == 1) {
+    afterDark = (await dbAfterDark.find({ name: id }))[0];
+    console.log("Got the after dark here", afterDark)
+  }
+
+  var returnAfterDark = {
+    name: afterDark.name,
+    image: afterDark.image
+  }
+
+  console.log(returnAfterDark)
 
   return {
     statusCode: 200,
-    body: JSON.stringify(afterDark)
+    body: JSON.stringify(returnAfterDark)
   }
 }
 

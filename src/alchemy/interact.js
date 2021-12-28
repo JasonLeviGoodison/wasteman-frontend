@@ -2,7 +2,7 @@ import { pinJSONToIPFS } from "./pinata.js";
 require("dotenv").config();
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
 const contract = require("../components/contracts/MiamiAfterDark.json");
-const contractAddress = "0xFa3bA15F69d3dd4d9b3c9F2f19A47e47E0Bcb49E";
+const contractAddress = "0x48c0b929dC4fFbA13d804D1e7BFA1bA4305aeAdC";
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 
