@@ -17,6 +17,10 @@ const Header = (props) => {
   const onRefundClicked = () => {
     navigate(routes.REFUND);
   }
+  
+  const onMineClicked = () => {
+    navigate(routes.MINE);
+  }
 
   return (
     <div className="header">
@@ -24,12 +28,11 @@ const Header = (props) => {
         <Navbar.Brand onClick={homeClicked}>
           {' '}
           <div style={{ paddingLeft: 10 }}>
-            Miami After Dark
-            {/* <img
+            <img
               alt="Company logo"
-              src={`${process.env.REACT_APP_REACT_URL}/checklist.png`}
-              style={{ paddingLeft: 5, paddingBottom: 5, width: 35 }}
-            /> */}
+              src={"amingos_logo.png"}
+              style={{ paddingLeft: 5, paddingBottom: 5, width: 154 }}
+            />
           </div>
           {' '}
 
@@ -39,8 +42,7 @@ const Header = (props) => {
           <Nav className="ml-auto">
             <Nav.Link href="http://3.90.235.184/"> Home </Nav.Link>
             <Nav.Link onClick={homeClicked}> Mint </Nav.Link>
-            <Nav.Link onClick={onRefundClicked}> Refund </Nav.Link>
-            <Nav.Link onClick={onMansClicked}> Collection </Nav.Link>
+            <Nav.Link onClick={onMineClicked}> My Collection </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

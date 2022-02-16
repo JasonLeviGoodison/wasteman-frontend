@@ -1,0 +1,72 @@
+.chooseBackground {
+  width: 250px;
+  border: "1px solid black";
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 15px;
+  margin: 10px;
+}
+
+.chooseBackground:hover {
+  opacity: 0.5;
+  transition: 0.1s ease;
+  background-color: #008cba;
+}
+
+.selectedBackground {
+  border-style: solid;
+  border-width: 3px;
+  border-color: #0d6efd;
+}
+
+/* PHONE ONLY */
+@media only screen and (max-width: 768px) {
+  .demoPage {
+    width: 100%;
+  }
+  .titleText {
+  }
+  .backgrounds {
+    flex-direction: column;
+  }
+  .chooseBackground {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .previewContainer {
+    flex-direction: column;
+    /*width: 200px;*/
+  }
+}
+
+/* DESKTOP ONLY */
+@media only screen and (min-width: 768px) {
+  .previewContainer {
+    flex-direction: row;
+  }
+  .previewImageContainer {
+  }
+}
+
+.duoText {
+  color: #4b4b4b;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-top: 0;
+  text-align: center;
+}
+
+.previewImageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-size: cover;
+  border-radius: 25px;
+}
+
+.previewContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}

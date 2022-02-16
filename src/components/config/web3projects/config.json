@@ -1,0 +1,10 @@
+{
+  "WOW": {
+    "name": "World of Women",
+    "contractAddress": "0xe785E82358879F061BC3dcAC6f0444462D4b5330"
+  },
+  "DOD": {
+    "name": "Doodles",
+    "contractAddress": "0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e"
+  }
+}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { connectWallet, getCurrentWalletConnected, mintNFTs, addWalletListener } from "../alchemy/interact.js";
+import { connectWallet, getCurrentWalletConnected, mintNFT, addWalletListener } from "../alchemy/interact.js";
 import { withSnackbar } from 'notistack';
 
 const Minter = (props) => {
@@ -30,7 +30,8 @@ const Minter = (props) => {
   };
 
   const onMintPressed = async () => {
-    const { status, success } = await mintNFTs(numToMint);
+    // TODO: FIX THIS
+    const { status, success } = await mintNFT(numToMint);
     setStatus(status);
     enqueueSnackbar(status, { 
       variant: success === true ? 'success' : 'error'

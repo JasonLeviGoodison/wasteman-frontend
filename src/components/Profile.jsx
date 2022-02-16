@@ -14,7 +14,7 @@ const Profile = ({entry, index, minter = false}) => {
   var provider = alchemyKey;
   var web3Provider = new Web3.providers.HttpProvider(provider);
   const web3 = new Web3(web3Provider);
-  const contractAddr = '0x48c0b929dC4fFbA13d804D1e7BFA1bA4305aeAdC';
+  const contractAddr = '0x70F3F21a0405bAB234AF7Bcbf2B33237E126B594';
 
   const contract = new web3.eth.Contract(MiamiAfterDark.abi, contractAddr);
 
@@ -34,10 +34,6 @@ const Profile = ({entry, index, minter = false}) => {
     return result;
   }
   
-  const mint = () => {
-
-  }
-  
   return (
     <div style={{display: 'flex', flexDirection: 'column', border: "2px solid #e5e5e5", borderRadius: 10, padding: 20, margin: 10, marginRight: 'auto', marginLeft: 'auto', maxWidth: 440}}>
       {!minter && <h2 className="titleText" style={{fontSize: 24}}> <b>M.A.D #{index + 1} <br/></b> </h2> }
@@ -48,7 +44,7 @@ const Profile = ({entry, index, minter = false}) => {
           {connectedWallet &&
             <div>
               {/* Put in an input field for number to mint */}
-              <Button onClick={mint}> Mint </Button>
+              <Button > Mint </Button>
             </div>
           }
           <Minter />

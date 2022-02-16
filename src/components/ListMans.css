@@ -20,16 +20,15 @@
 }
 
 .mansTitle {
-  color: #4b4b4b;
+  color: #8d8988;
   border: 0;
   box-shadow: none;
   margin: 30px 21px 24px;
-  padding: 0 calc(7% + 15px);
   text-align: center;
 }
 
 .paraText {
-  color: #4b4b4b;
+  color: #8d8988;
   font-size: 19px;
   font-weight: 500;
   line-height: 1.4;
@@ -40,7 +39,7 @@
 }
 
 .titleText {
-  color: #4b4b4b;
+  color: #8d8988;
   font-size: 46px;
   font-weight: 700;
   line-height: 1.6;
