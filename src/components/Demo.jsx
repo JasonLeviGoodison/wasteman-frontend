@@ -19,7 +19,7 @@ const Demo = (props) => {
 
   const [project, setProject] = useState(null);
   const [avatarChange, setShowAvatarChange] = useState(false);
-  const [mintDisabled, setMintDisabled] = useState(false);
+  const [mintDisabled, setMintDisabled] = useState(true);
   const [walletAddress, setWalletAddress] = useState(null);
   const [tokenId, setTokenId] = useState("");
   const { enqueueSnackbar } = props;
@@ -98,11 +98,12 @@ const Demo = (props) => {
 
   const handleProjectSelected = (evt) => {
     evt.preventDefault();
-    if (evt.target.value != 'Amingo' && tokenId == "") {
+    if (evt.target.value != 'Amingo' && tokenId == "" || evt.target.value == 'Amingo') {
       setMintDisabled(true);
     } else {
       setMintDisabled(false)
     }
+    
     setSelectedProject(evt.target.value);
   }
   
@@ -110,10 +111,11 @@ const Demo = (props) => {
     setStep(1);
     setSelectedProject('Amingo');
     setShowAvatarChange(false);
+    setTokenId("");
   }
 
   const onChangeCharacterClicked = () => {
-    setStep(step += 1)
+    setStep(step + 1)
   }
 
   const onMintClicked = async () => {
@@ -124,9 +126,6 @@ const Demo = (props) => {
 
     // mint one of ours
     // hit our backend and sell them
-    if (mintDisabled) {
-      return false;
-    }
     setIsMinting(true);
     await new Promise(r => setTimeout(r, 3000));
     setIsMinting(false);
@@ -136,6 +135,11 @@ const Demo = (props) => {
 
   const clickedBackground = (index) => {
     setSelectedBackground(index);
+    setStep(step + 1);
+  }
+
+  const onSkipClicked = () => {
+    setSelectedProject('Amingo');
     setStep(step + 1);
   }
 
@@ -167,7 +171,7 @@ const Demo = (props) => {
           <div>
             <div className="mansTitle">
                 <h1 className="titleText">Choose the cause you want to support </h1>
-                <p className="paraText">Your environment will be cleaned after we reach out donation goals</p>
+                <p className="paraText">Your environment will be cleaned after we reach our donation goals</p>
             </div>
             <div className="backgrounds" style={{display: 'flex', padding: 20, justifyContent: 'center'}}>
               {
@@ -196,7 +200,7 @@ const Demo = (props) => {
                       <div style={{marginRight: 'auto', marginLeft: 'auto'}}>
                         <ReactLoading type={'cubes'} color="#2782EC" width={240}/>
                       </div> :
-                      <div className="previewImageContainer" style={{ backgroundImage: `url(${backgrounds[selectedBackground].img})`, marginRight: 'auto', marginLeft: 'auto' }}>
+                      <div className="previewImageContainer" style={{ backgroundImage: `url(${backgrounds[selectedBackground].img})`, marginRight: 'auto', marginLeft: 'auto', maxWidth: 350 }}>
                         <img src={projectInfo[selectedProject].img} onClick={onBackClicked}/> 
                       </div>
                   }
@@ -204,7 +208,7 @@ const Demo = (props) => {
                 </div>
                 {
                   !isMinting &&
-                    <Button variant="primary" id="nextButton" onClick={onMintClicked} style={{width: 'fitContent', marginTop: 11, marginLeft: 20}} disabled={mintDisabled}>
+                    <Button variant="primary" id="nextButton" onClick={onMintClicked} style={{width: 'fitContent', marginTop: 11, marginLeft: 20}} >
                       Mint
                     </Button>
                 }
@@ -215,55 +219,50 @@ const Demo = (props) => {
       }
       {
         step == 3 &&
-          <div style={{display: 'flex', justifyContent: "center"}}>
-            <div>
-              <div className="mansTitle">
-                <h1 className="titleText">Would you like to import a character?</h1>
-                <p className="paraText">Even if you import an avatar from another project you will always own your Amingo and can revert to it at any time</p>
+          <div>
+            {/*loading && <*/}
+            <div className="mansTitle">
+                <h1 className="titleText">You minted an Amingo!!!!🎉🥳</h1>
+                <h1 className="paraText">Would you like to import a different Avatar?</h1>
                 {
                   avatarChange ?
-                  <div>
-                    <div className="previewContainer">
-                        <div className="previewImageContainer" style={{ backgroundImage: `url(${backgrounds[selectedBackground].img})` }}>
-                          <img src={projectInfo[selectedProject].img} onClick={onBackClicked}/> 
-                        </div>
-                        
-                        <div style={{width: '100%', marginLeft: 10, marginTop: 20}} >
-                          <FormControl style={{width: '90%'}}>
-                              <InputLabel id="demo-simple-select-label">Character</InputLabel>
-                              <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={selectedProject}
-                                label="Project To Import From"
-                                onChange={handleProjectSelected}
-                              >
-                                {
-                                  projects.map(x => {
-                                    return <MenuItem value={x}>{projectInfo[x].name}</MenuItem>
-                                  })
-                                }
-                              </Select>
-                            </FormControl>
-                          {
-                            selectedProject != 'Amingo' &&
-                            <FormControl style={{width: '90%', marginTop: 10}}>
-                              <InputLabel htmlFor="my-input">Token Id</InputLabel>
-                              <Input id="my-input" aria-describedby="my-helper-text" onChange={onTokenChange}/>
-                                <FormHelperText id="my-helper-text">You need to own this token</FormHelperText>
-                            </FormControl>
-                          }
-                      </div>
+                  <div style={{width: 300, marginRight: 'auto', marginLeft: 'auto'}}>
+                    <div style={{width: '100%', marginLeft: 10, marginTop: 20}} >
+                      <FormControl style={{width: '90%'}}>
+                          <InputLabel id="demo-simple-select-label">Character</InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={selectedProject}
+                            label="Project To Import From"
+                            onChange={handleProjectSelected}
+                          >
+                            {
+                              projects.map(x => {
+                                return <MenuItem value={x}>{projectInfo[x].name}</MenuItem>
+                              })
+                            }
+                          </Select>
+                        </FormControl>
+                      {
+                        selectedProject != 'Amingo' &&
+                        <FormControl style={{width: '90%', marginTop: 10}}>
+                          <InputLabel htmlFor="my-input">Token Id</InputLabel>
+                          <Input id="my-input" aria-describedby="my-helper-text" onChange={onTokenChange}/>
+                            <FormHelperText id="my-helper-text">You need to own this token</FormHelperText>
+                        </FormControl>
+                      }
                     </div>
                     <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
                       <Button variant="primary" id="nextButton" onClick={onChangeCharacterClicked} style={{width: 300, marginTop: 11, marginLeft: 20}} disabled={mintDisabled}>
                         Change character
                       </Button>
-                      <Button variant="secondary" id="nextButton" onClick={() => setStep(step + 1)} style={{width: 300, marginTop: 11, marginLeft: 20}}>
+                      <Button variant="secondary" id="nextButton" onClick={onSkipClicked} style={{width: 300, marginTop: 11, marginLeft: 20}}>
                         Skip
                       </Button>
                     </div>
-                  </div> :
+                  </div>
+                  : 
                   <div style={{marginTop: 20}}>
                     <Button variant="primary" id="nextButton" onClick={() => setShowAvatarChange(true)} style={{width: 'fitContent', marginTop: 11, marginLeft: 20, width: 70}} >
                       Yes
@@ -271,9 +270,15 @@ const Demo = (props) => {
                     <Button variant="secondary" id="nextButton" onClick={() => setStep(step + 1)} style={{width: 'fitContent', marginTop: 11, marginLeft: 20,  width: 70}}>
                       No
                     </Button>
-                  </div>
+                  </div> 
                 }
-              </div>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: "center", marginTop: 25}}>
+                  <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', maxWidth: 350}}>
+                    <div className="previewImageContainer" style={{ backgroundImage: `url(${backgrounds[selectedBackground].img})`, maxWidth: 350}}>
+                        <img src={projectInfo[selectedProject].img} onClick={onBackClicked}/>
+                    </div>
+                  </div>
+                </div>
             </div>
           </div>
       }
@@ -286,7 +291,7 @@ const Demo = (props) => {
                 <p className="paraText">Share to your social media</p>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: "center", marginTop: 25}}>
                   <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                    <div className="previewImageContainer" style={{ backgroundImage: `url(${backgrounds[selectedBackground].img})` }}>
+                    <div className="previewImageContainer" style={{ backgroundImage: `url(${backgrounds[selectedBackground].img})`, maxWidth: 350 }}>
                         <img src={projectInfo[selectedProject].img} onClick={onBackClicked}/>
                     </div>                 
                   </div>

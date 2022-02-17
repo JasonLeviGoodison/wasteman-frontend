@@ -70,25 +70,7 @@ const MyNFTs = (props) => {
 
   return (
     <div className="Refund" style={{display: 'flex', flexDirection: "column"}}>
-      {
-        walletAddress == "" && <Button id="walletButton" onClick={connectWalletPressed}> <span>Connect Wallet</span> </Button>
-      }
-      {
-        walletAddress != "" &&
-        <>
-          { 
-          loading ?
-            "Loading" :
-            <div style={{display: "flex", justifyContent: 'center'}}>
-              <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-                {myNFTs.length > 0 && myNFTs.map((entry, index) => {
-                  return <Profile entry={entry} index={index}/>
-                })}
-              </div>
-            </div>
-          }
-        </>
-      }
+      Coming soon!
     </div>
   );
 }

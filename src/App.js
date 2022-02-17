@@ -15,7 +15,7 @@ function App() {
       <Router>
         <Header/>
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<Demo/>} />
           <Route path="/mans" element={<ListMans metamask/>} />
           <Route path="/refund" element={<Refund/>} />
           <Route path="/mine" element={<MyNFTs/>} />
