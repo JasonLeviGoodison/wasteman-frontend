@@ -7,6 +7,7 @@
 [[redirects]]
   from = "/"
   to = "https://amingos-7bea22.webflow.io/"
+  force = true
   status = 200
 
 [[redirects]]
