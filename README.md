@@ -4,13 +4,16 @@ Amingos is an NFT project that shows the impact you're having on the environment
 
 Most NFT projects have blank backgrounds. These are are some of our backgrounds
 
-Before Donation:
+# Forest
+Before and after donation made
 
 <img src="https://user-images.githubusercontent.com/20760528/188785455-d4dac0b8-155d-4357-abb4-b616e2bff85f.png" width="400" height="400" />
-
-After Donation:
-
 <img src="https://user-images.githubusercontent.com/20760528/188785452-50e0f351-08e2-4c34-8482-ff7a9bf5a809.png" width="400" height="400" />
+
+# Example Mingo (Coral)
+<img src="https://user-images.githubusercontent.com/20760528/188939573-4c794314-d39c-461f-b285-f2adf48e64bf.png" width="400" height="400" />
+
+# Video
 
 Video explanation:
 https://twitter.com/amingosnft/status/1520447892217073664
