@@ -1,5 +1,7 @@
 # What is Wastemans (renamed Amingos)
-Amingos is an NFT project that shows the impact you're having on the environment in your Profile picture. Let me explain
+Amingos is an NFT project that shows the impact you're having on the environment in your Profile picture. Let me explain!
+
+
 Most NFT projects have blank backgrounds. These are are some of our backgrounds
 
 Before Donation:
