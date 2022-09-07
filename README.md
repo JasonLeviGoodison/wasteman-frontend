@@ -16,4 +16,8 @@ https://twitter.com/amingosnft/status/1520447892217073664
 Aimed at raising money for climate change, we partnered with 4 charities in (Forest, Ocean, Air, Coral reef). Each amingo has a background that represents a destroyed eco system and after your donation is made, we clean that background for you.
 
 
+# All the normal NFT PFP fun!
+
+There are 7 base Amingos with varying rarity and over 1 million unique combinations of possible accessories
+
 
