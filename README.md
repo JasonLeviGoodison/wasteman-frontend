@@ -18,7 +18,7 @@ Before and after donation made
 Video explanation:
 https://twitter.com/amingosnft/status/1520447892217073664
 
-Aimed at raising money for climate change, we partnered with 4 charities in (Forest, Ocean, Air, Coral reef). Each amingo has a background that represents a destroyed eco system and after your donation is made, we clean that background for you.
+Aimed at raising money for climate change, we partnered with 4 charities in (Forest, Ocean, Air, Coral reef). Each amingo has a background that represents a destroyed eco system and after you purchase one, we donate a portion of that on your behalf and clean that background, we clean that background for you.
 
 
 # All the normal NFT PFP fun!
